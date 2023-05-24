@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>New Post</title>
-    <link rel="stylesheet" type="text/css" href="/public/style.css">
+    <link rel="stylesheet" type="text/css" href="/forms.css">
 
   </head>
   <body>
@@ -25,9 +25,9 @@
       <input type="text" id="slug" name="slug" value='<%= post.slug %>'><br>
   
     
-      <button type="submit">Update Post</button>
+      <button type="submit" class="btn">Update Post</button>
     </form>
-    <a href="/">Back to Home</a>
+    <a href="/api/v1/posts/all">Back to Home</a>
   </body>
   
 </html>

@@ -15,11 +15,19 @@ app.use(methodOverride('_method'));
 app.set('view engine',ejs);
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static('public'));
+app.use(express.static('views/public'));
 
-app.get('/', function(req, res) {
-    res.render('home.ejs');
-  });
+app.use((req, res, next) => {
+  if (req.url === '/') {
+    res.redirect('/api/v1/posts/all');
+  } else {
+    next();
+  }
+});
+
+// app.get('/', function(req, res) {
+//     res.render('home.ejs');
+//   });
 
 app.get('/create', function(req, res) {
     res.render('newpost.ejs');
@@ -37,8 +45,6 @@ app.get('/update/:id', async (req, res) => {
       res.status(500).json({ success: false, error: error.message });
     }
   });
-  
-  
 
 
 

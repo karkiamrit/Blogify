@@ -11,8 +11,8 @@ exports.createPost = async (req, res, next) => {
       datePublished,
       slug
     });
-
-    res.status(201).json({ success: true, post });
+    res.render('post.ejs', { post:post}); 
+    // res.status(201).json({ success: true, post });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -48,12 +48,13 @@ exports.updatePost = async (req, res, next) => {
       new: true,
       runValidators: true,
     });
-
+    
     if (!updatedPost) {
       return res.status(404).json({ success: false, message: 'Post not found' });
     }
-    // res.render('post', { post: updatedPost });
-    res.status(200).json({ success: true, post: updatedPost });
+    res.render('post.ejs', { post:updatedPost}); 
+    
+    
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -68,7 +69,9 @@ exports.deletePost = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Post not found' });
     }
 
-    res.status(200).json({ success: true, message: 'Post deleted successfully' });
+    // res.status(200).json({ success: true, message: 'Post deleted successfully' });
+    res.redirect('/api/v1/posts/all')
+   
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }

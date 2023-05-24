@@ -3,27 +3,35 @@
 <html>
   <head>
     <title>All Posts</title>
-    <link rel="stylesheet" type="text/css" href="./public/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
   </head>
   <body>
     <h1>All Posts</h1>
     <% posts.forEach((post) => { %>
       <h2><%= post.title %></h2>
-      <p><%= post.content %></p>
+      <p>Author: <%= post.author %></p>
+
+      <form action="/api/v1/post/<%=post.id%>" method="GET">
+        <button class="btn">View Full Post</button>
+      </form> 
+      
+      <br>
+
+      <form action="/update/<%=post.id%>" >
+        <button class="btn">Update the Post</button>
+      </form>  
+
+      <br>
+
       <form action="/api/v1/post/<%=post._id%>?_method=DELETE" method="POST">
         <input type="hidden" name="_method" value="DELETE">
-        <button>Delete the Post</button>
+        <button class="btn">Delete the Post</button>
       </form> 
-      <br>
-      <form action="/update/<%=post.id%>" >
-        <button>Update the Post</button>
-      </form>  
-      <hr>
       
-
+      <hr>
     <% }); %>
     <form action="/create" >
-      <button>Create a New Post</button>
+      <button class="btn">Create a New Post</button>
     </form> 
   </body>
 </html>
